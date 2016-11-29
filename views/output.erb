@@ -1,0 +1,25 @@
+<div class="col-md-12">
+  <h1>Tamagachi == alive? <%= @tamagotchi.is_alive? %></h1>
+    <a href="/check"><button class="btn btn-default" type="submit">Check on Tamagotchi</button></a>
+    <% if @tamagotchi.timers[0] > 5 && @tamagotchi.timers[1] > 5 && @tamagotchi.timers[2] > 5 %>
+      <span class="tamagotchi">
+        &#x1F638;
+      </span>
+    <% else %>
+    <span class="tamagotchi">
+      &#x1F640;
+    </span>
+    <% end %>
+</div>
+<div class="col-md-4 text-center">
+  <h2>Food level: <%= @tamagotchi.timers[0] %></h2>
+  <a href="/feed"><button class="btn btn-default">Feed Tamagotchi</button></a>
+</div>
+<div class="col-md-4 text-center">
+  <h2>Sleep level: <%= @tamagotchi.timers[1] %></h2>
+  <a href="/sleep"><button class="btn btn-default">Put Tamagotchi to sleep</button></a>
+</div>
+<div class="col-md-4 text-center">
+  <h2>Activity level: <%= @tamagotchi.timers[2] %></h2>
+  <a href="/activity"><button class="btn btn-default">Play with Tamagotchi</button></a>
+</div>

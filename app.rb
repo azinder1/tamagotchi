@@ -34,17 +34,20 @@ end
 get('/feed') do
   @tamagotchi = Tamagotchi.get_tamagotchi
   @tamagotchi.set_food_level(1)
+  @tamagotchi.timers[0]
   erb(:output)
 end
 
 get('/sleep') do
   @tamagotchi = Tamagotchi.get_tamagotchi
   @tamagotchi.set_sleep_level(1)
+  @tamagotchi.timers[1]
   erb(:output)
 end
 
 get('/activity') do
   @tamagotchi = Tamagotchi.get_tamagotchi
   @tamagotchi.set_activity_level(1)
+  @tamagotchi.timers[2]
   erb(:output)
 end

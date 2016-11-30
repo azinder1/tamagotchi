@@ -6,9 +6,10 @@ class Tamagotchi
     @food_level = 10
     @sleep_level = 10
     @activity_level = 10
-    @food_time = Time.now.min
-    @sleep_time = Time.now.min
-    @activity_time = Time.now.min
+    @food_time = Time.now.sec
+    @sleep_time = Time.now.sec
+    @activity_time = Time.now.sec
+    @button_time = Time.now.sec
   end
   def countdown
     @@time_left > 0 ? @@time_left-=1 : @@time_left = 10
@@ -26,22 +27,25 @@ class Tamagotchi
     @activity_level
   end
   def set_food_level(level)
-    if @food_level <= 9
+    if (@food_level <= 9) && (2 - (Time.now.sec - @button_time) <= 0 )
       @food_level+= level
+      @button_time = Time.now.sec
+      @food_time =  Time.now.sec
     end
-    @food_time =  Time.now.min
   end
   def set_activity_level(level)
-    if @activity_level <= 5
+    if (@activity_level <= 5) && (2 - (Time.now.sec - @button_time) <= 0)
       @activity_level+= level
+      @button_time = Time.now.sec
+      @activity_time = Time.now.sec
     end
-    @activity_time = Time.now.min
   end
   def set_sleep_level(level)
-    if @sleep_level <= 4
+    if (@sleep_level <= 4) && (2 - (Time.now.sec - @button_time) <= 0 )
       @sleep_level+= level
+      @button_time = Time.now.sec
+      @sleep_time = Time.now.sec
     end
-    @sleep_time = Time.now.min
   end
   def is_alive?
     if @food_level <= 0 || @sleep_level <= 0 || @activity_level <= 0
@@ -51,9 +55,9 @@ class Tamagotchi
     end
   end
   def time_passes(time)
-    @food_level = 10 - (Time.now.min - @food_time + time)
-    @sleep_level = 10 - (Time.now.min - @sleep_time + time)
-    @activity_level = 10 - (Time.now.min - @activity_time + time)
+    @food_level = 10 - (Time.now.sec - @food_time + time).abs
+    @sleep_level = 10 - (Time.now.sec - @sleep_time + time).abs
+    @activity_level = 10 - (Time.now.sec - @activity_time + time).abs
   end
   def save_tamagotchi
     @@tamagotchis = {'name' => self}
